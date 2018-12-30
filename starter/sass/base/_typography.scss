@@ -1,0 +1,50 @@
+
+/* inheritance to every element within body */
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: $color-grey-dark;
+    padding: 3rem;
+}
+
+.heading-primary {
+    color: white;
+    text-transform: uppercase;
+    
+    /* takes away shaking animation */
+    backface-visibility: hidden;
+    margin-bottom: 6rem;
+    
+
+    &--main {
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+    
+        /* for the animation to work u need name & duration */
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+    
+        
+    
+        /* find animation: https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+        examples:
+        animation-timing-function: ease-out;
+        animation-iteration-count: 3;
+        animation-delay: 3s; */
+    
+        /* challenge make animation for right
+        animation: moveInRight 1s ease-out; */
+    }
+    
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.75rem;
+        animation: moveInRight 1s ease-out;
+    }
+}
