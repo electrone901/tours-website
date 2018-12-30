@@ -1,83 +1,166 @@
-/*
-COLORS:
+/* applies normalize/simple universal reset css I inheritance to all elements especified to make every browser to look the same, universal selector to apply to every element */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  /*inherited from body*/ }
 
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
+/* root font-size 
+    we use the rem technique to be responsive in every single element but rem is not available in iexplorer less than 9
 */
+html {
+  /* we changed to 10 instead of 16 for simplicity so we can just dive pixNumb/10 and change all px to rem (1 rem = 10px) 
+    but we need to convert it to % the browser default 16px = 100% therefore 
+    16/10 = .625 so our % should be = 62.5% to allow the user to zoom in automatically
+    */
+  /* font-size: 10px;  */
+  font-size: 62.5%; }
 
-/* normalize/simple reset css to make every browser to look the same, universal selector to apply to every element */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /*takes awasy boarding & padding*/
-}
-
-/* inheritance to every ele in body */
+/* inheritance to every element within body */
 body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #777;
-    padding: 30px;
-}
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box;
+  /*takes away boarding & padding*/ }
 
 .header {
-     height: 95vh; 
-     background-image: linear-gradient(
-         to right bottom, 
-       rgba(126, 213, 111, 0.8), 
-         rgba(40, 180, 131, 0.8)), 
-         url(../img/hero.jpg);
-     background-size: cover;
-     background-position: top;
-
-     /* relative to itself but needs(top, left, bottom or right)  */
-     position: relative;
-
-     /* get polygon figures https://bennettfeely.com/clippy/  clips out the header, polygon(topLeft x y, topRight x y, bottomRight x y, bottomLeft x y) */
-     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%)
-}
-
-.logo-box {
-    /* absolute moves the element out of the flow, and is relative to the nearest positioned ancestor. In this case is the header. If element has no positioned ancestors, it uses the document body*/
-    position: absolute;
-    top: 40px;
-    left: 40px;
-}
-
-.logo {
-    height: 35px;
-}
-
-.text-box {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  /* relative to itself but needs(top, left, bottom or right)  */
+  position: relative;
+  /* get polygon figures https://bennettfeely.com/clippy/  clips out the header, polygon(topLeft x y, topRight x y, bottomRight x y, bottomLeft x y) */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%) .header __logo-box;
+  /* absolute moves the element out of the flow, and is relative to the nearest positioned ancestor. In this case is the header. If element has no positioned ancestors, it uses the document body*/
+    clip-path-position: absolute;
+    clip-path-top: 4rem;
+    clip-path-left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__logo:hover {
+    animation: moveInRight 1s ease-out; }
+  .header__text-box {
     position: absolute;
     top: 40%;
     left: 50%;
     /* transform its position x y  in relation to itsel*/
-    transform: translate(-50%, -50%)
-}
+    transform: translate(-50%, -50%);
+    text-align: center; }
 
 .heading-primary {
-    color: white;
-    text-transform: uppercase;
-}
-
-.heading-primary-main {
+  color: white;
+  text-transform: uppercase;
+  /* takes away shaking animation */
+  backface-visibility: hidden;
+  margin-bottom: 6rem; }
+  .heading-primary--main {
     display: block;
-    font-size: 60px;
+    font-size: 6rem;
     font-weight: 400;
-    letter-spacing: 35px;
-}
-
-.heading-primary-sub {
+    letter-spacing: 3.5rem;
+    /* for the animation to work u need name & duration */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    /* find animation: https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+        examples:
+        animation-timing-function: ease-out;
+        animation-iteration-count: 3;
+        animation-delay: 3s; */
+    /* challenge make animation for right
+        animation: moveInRight 1s ease-out; */ }
+  .heading-primary--sub {
     display: block;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 700;
-    letter-spacing: 17.4px;
-}
+    letter-spacing: 1.75rem; }
 
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem) rotate(0deg); }
+  60% {
+    transform: rotate(180deg); }
+  80% {
+    transform: translateX(-1rem) rotate(180deg); }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(180deg); } }
 
+@keyframes moveInLeft {
+  /* start @ -100 from the element */
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  /* @ 80% goes to 10px greater   */
+  80% {
+    transform: translate(1rem); }
+  /* finish goes back to 0*/
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
 
+@keyframes moveInBottom {
+  /* start @ -100 from the element */
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  /* finish goes back to 0*/
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+/* link is pseudo class of btn */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  /* top bottom left right */
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  position: relative; }
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  /* we'll show it here after hover */ }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; }
+
+.btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn--white {
+  background-color: #fff;
+  color: #777; }
+  .btn--white::after {
+    background-color: #fff; }
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  /* needs a relative position that can find in this case is the header but we'll the button cause we want to be a button */
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* defines the position of the element, is behind the button */
+  z-index: -1;
+  /* adding the trasition after hover */
+  transition: all .4s; }
+
+.btn--animated {
+  animation: moveInBottom .5s ease-in-out .75s;
+  /* automatically applies the styles @ 0% before starts */
+  animation-fill-mode: backwards; }
