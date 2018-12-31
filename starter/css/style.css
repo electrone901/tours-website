@@ -148,11 +148,13 @@ body {
   /* relative to itself but needs(top, left, bottom or right)  */
   position: relative;
   /* get polygon figures https://bennettfeely.com/clippy/  clips out the header, polygon(topLeft x y, topRight x y, bottomRight x y, bottomLeft x y) */
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%) .header __logo-box;
-  /* absolute moves the element out of the flow, and is relative to the nearest positioned ancestor. In this case is the header. If element has no positioned ancestors, it uses the document body*/
-    clip-path-position: absolute;
-    clip-path-top: 4rem;
-    clip-path-left: 4rem; }
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    /* absolute moves the element out of the flow, and is relative to the nearest positioned ancestor. In this case is the header. If element has no positioned ancestors, it uses the document body*/
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
   .header__logo {
     height: 3.5rem; }
   .header__text-box {
@@ -162,3 +164,31 @@ body {
     /* transform its position x y  in relation to itsel*/
     transform: translate(-50%, -50%);
     text-align: center; }
+
+.row {
+  max-width: 114rem;
+  background-color: #eee;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    background-color: orangered;
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-2-of-3 {
+    width: calc( 2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc( 2 * ((100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 *  6rem); }
