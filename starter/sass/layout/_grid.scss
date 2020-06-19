@@ -2,7 +2,6 @@
 // standar width: 1140px but in rem, therefore: 1px/10rem
 .row {
     max-width: $grid-width;
-    background-color: #eee;
     // center block element inside another one
     margin: 0 auto;
 
@@ -16,7 +15,6 @@
 
     // attribute selector selects all classes that starts with[class^="col-"]
     [class^="col-"] {
-        background-color: orangered;
         float: left;
 
         // select everyhing except the last-child
